@@ -1,0 +1,4 @@
+.env
+*.pyc
+.vscode
+nlp_deberta_rex-uninlu_chinese-base

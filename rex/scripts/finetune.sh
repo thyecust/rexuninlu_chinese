@@ -1,0 +1,31 @@
+torchrun --nproc_per_node=${nproc} main.py \
+    --bert_model_dir=${bert_model_dir} \
+    --data_path=${data_path} \
+    --run_name=${run_name} \
+    --task_metrics=${metrics} \
+    --do_train=True \
+    --do_eval=True \
+    --per_device_train_batch_size=`expr ${batch_size} / ${nproc}` \
+    --gradient_accumulation_steps=${grad_acc} \
+    --per_device_eval_batch_size=`expr ${batch_size} / ${nproc}` \
+    --output_dir=${output_dir} \
+    --evaluation_strategy=epoch \
+    --num_train_epochs=${epochs} \
+    --learning_rate=${lr} \
+    --lr_scheduler_type=${lr_type} \
+    --log_level=info \
+    --logging_strategy=steps \
+    --logging_steps=${logging_steps} \
+    --seed=42 \
+    --fp16 \
+    --load_best_model_at_end=true \
+    --report_to=none \
+    --save_strategy=epoch \
+    --save_total_limit=10 \
+    --greater_is_better=True \
+    --metric_for_best_model=f1 \
+    --verbose_debug \
+    --remove_unused_columns=False \
+    --weight_decay=0.01 \
+    --warmup_ratio=0.1 \
+    --load_checkpoint=${load_checkpoint}
