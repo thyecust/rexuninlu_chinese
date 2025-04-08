@@ -11,10 +11,39 @@ $ python3 demo.py
 # {'output': [[{'type': '组织机构', 'span': '北大西洋议会', 'offset': [0, 6]}], [{'type': '地理位置', 'span': '西班牙', 'offset': [14, 17]}], [{'type': '地理位置', 'span': '巴塞罗那', 'offset': [17, 21]}]]}
 ```
 
+
+## Files
+
+```bash
+find . -name "*.py" -type f -not -path "*.env*" -not -path "./nlp*" -exec wc -l {} + | sort -n
+     0 ./rex/data_utils/__init__.py
+     0 ./rex/__init__.py
+     0 ./rex/model/__init__.py
+     0 ./rex/Trainer/__init__.py
+     3 ./rex/data_utils/token_config.py
+    73 ./demo.py
+    73 ./rex/data_utils/position_id_utils.py
+    80 ./rex/model/model.py
+    84 ./rex/Trainer/utils.py
+   108 ./rex/arguments.py
+   149 ./rex/model/rotary.py
+   168 ./rex/main.py
+   240 ./rex/model/activations.py
+   593 ./rex/data_utils/data_loader.py
+   817 ./rex/Trainer/trainer.py
+  1133 ./rex/model/utils_mod.py
+  3521 total
+```
+
 File structure:
 
 - `nlp_deberta_rex_uninlu_chinese-base` contains model files, downloaded from ModelScope.
 - `rex` contains training code for the RexUniNLU model. Under Apache-License 2.0.
+  - `rex/model` model definition.
+  - `rex/main.py` eval/train entrypoint.
+  - `rex/data_utils` data loader.
+  - `rex/data`/`rex/scripts` datasets/scripts used for eval/train.
+  - `rex/Trainer` training code.
 - `demo.py` is a demo to run the model.
 
 ## Evaluation
