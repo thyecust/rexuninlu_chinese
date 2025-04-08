@@ -19,15 +19,7 @@ def main():
     from model.model import RexModel
     from Trainer.trainer import RexModelTrainer
     from Trainer.utils import compute_metrics
-    from modelscope.hub.check_model import check_local_model_is_latest
-    from modelscope.utils.constant import Invoke, ThirdParty
 
-    check_local_model_is_latest(
-        '../',
-        user_agent={
-            Invoke.KEY: Invoke.LOCAL_TRAINER,
-            ThirdParty.KEY: 'damo/nlp_deberta_rex-uninlu_chinese-base'
-        })
     data_args, training_args, model_args = get_args()
     
     training_args.output_dir = os.path.join(training_args.output_dir, training_args.run_name)
