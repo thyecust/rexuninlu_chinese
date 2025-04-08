@@ -278,6 +278,29 @@ class RexModelTrainer(Trainer):
 
             return EvalLoopOutput(predictions=all_preds, label_ids=all_labels, metrics=metrics, num_samples=num_samples)
 
+    def do_predict(
+        self,
+        model: nn.Module,
+        inputs: Dict[str, Union[torch.Tensor, Any]]
+    ) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Optional[torch.Tensor]]:
+        """
+        Another version of prediction_step(). Used for Demos.
+        """
+        pred_info_list = []
+        with torch.no_grad():
+            with self.compute_loss_context_manager():
+                schema = inputs['schema']
+                text = inputs['text']
+                legal_output_type_list = self.get_legal_output_type_list(inputs)
+                self.prompt_loop(model, text, {(): schema}, pred_info_list, legal_output_type_list)
+        if not pred_info_list and (self.tokenizer.additional_special_tokens[2] in text or self.tokenizer.additional_special_tokens[3] in text):
+            with self.compute_loss_context_manager():
+                schema = inputs['schema']
+                text = inputs['text']
+                legal_output_type_list = self.get_legal_output_type_list(inputs)
+                self.prompt_loop(model, text, {(): schema}, pred_info_list, legal_output_type_list, True)
+        return pred_info_list
+
     def prediction_step(
         self,
         model: nn.Module,

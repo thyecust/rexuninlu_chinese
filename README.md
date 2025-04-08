@@ -11,6 +11,13 @@ $ python3 demo.py
 # {'output': [[{'type': '组织机构', 'span': '北大西洋议会', 'offset': [0, 6]}], [{'type': '地理位置', 'span': '西班牙', 'offset': [14, 17]}], [{'type': '地理位置', 'span': '巴塞罗那', 'offset': [17, 21]}]]}
 ```
 
+```bash
+$ python3 confidence_demo.py 
+{'output': [[{'type': '下面的句子中，代词“它”指代的是“事物”吗？是的', 'span': '[CLASSIFY]', 'offset': [0, 10], 'confidence': 0.6947}]]}
+{'output': [[{'type': '负向情感', 'span': '[CLASSIFY]', 'offset': [0, 10], 'confidence': 0.9969}]]}
+{'output': [[{'type': '民间故事', 'span': '[MULTICLASSIFY]', 'offset': [0, 15], 'confidence': 0.674}], [{'type': '童话', 'span': '[MULTICLASSIFY]', 'offset': [0, 15], 'confidence': 0.812}]]}
+```
+
 
 ## Files
 
